@@ -57,6 +57,15 @@ func build(tree *Node, points []Point, depth int) {
 	}
 
 	tree.point = points[pivot]
-	build(tree.left, points[:pivot], depth+1)
-	build(tree.right, points[pivot+1:], depth+1)
+
+	if len(points[:pivot]) > 0 {
+		tree.left = &Node{}
+		build(tree.left, points[:pivot], depth+1)
+	}
+
+	if len(points[pivot+1:]) > 0 {
+		tree.right = &Node{}
+		build(tree.right, points[pivot+1:], depth+1)
+	}
+
 }
